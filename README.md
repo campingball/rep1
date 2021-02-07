@@ -36,4 +36,11 @@ githubの機能説明：その②「master(main)とbranch」
 	master  |  1  |--> |  2  |--> |  3  |--> |  4  |--> |  5  |
 		|_____|    |_____|    |_____|    |_____|    |_____|
 
+githubの機能説明：その②「issues」
 
+プロジェクトTOP画面(https://github.com/campingball/rep1)にはいろいろタブ
+があるが。「issues」タブ内では「課題を作る」事ができる。
+掲示板のスレッドの様な感じ？
+例えば、接触確認アプリのココアのRepositoriesに入るとして「NewIssues」
+ボタンを押下し、タイトルに「androidでは接触確認ができません」などと問題を
+指摘したりする事ができる。
