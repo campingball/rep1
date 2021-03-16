@@ -1,5 +1,5 @@
 # rep1
-リポジトリ①
+リポジトリ-1
 「●GitHubの全体像
 GreenMameのGitHubアカウントを開く
 
