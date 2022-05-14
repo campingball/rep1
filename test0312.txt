@@ -2,20 +2,26 @@
 
 復習です0319a
 
+<<<<<<< HEAD
 a
 
 b
+=======
+a 
+
+black
+>>>>>>> black
 
 c
 
 d
 
-edit
+e
 
-flow
+f
 
-great
+g
 
-hear
+h
 
-increase
+i
