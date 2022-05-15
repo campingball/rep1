@@ -2,11 +2,11 @@
 
 復習です0319a
 
-a apple
+a
 
-b black
+b
 
-c chocolate
+c
 
 d
 
