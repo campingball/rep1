@@ -54,11 +54,8 @@ namespace StaffApi0220.Controllers
                 
                 ).FirstOrDefault();
                     
-                return staff;
-
-                
+                return staff;                
             }
-
     }
 
         
