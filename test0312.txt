@@ -1,21 +1,138 @@
-べんきょうかいです　
+using Dapper;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using MySql.Data.MySqlClient;
+using System;
+using System.Data;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-復習です0319a
+namespace StaffApi0220.Controllers
+{
+    [ApiController]
+    [Route("api/[controller]")] 
+    public class StaffController : ControllerBase
+    {
+        private readonly ILogger<StaffController> _logger;
+        private IDbConnection Connection;
 
-a
+        public StaffController(IDbConnection connection, ILogger<StaffController> logger)
+        {
+            this.Connection = connection;
+            _logger = logger;
+        }
 
-b
+        [HttpGet]
+        public IEnumerable<Staff> Get() 
+        {
 
-c
+            using (var connection = Connection) 
+            {
+                   connection.Open(); //open database
 
-d
 
-e
+                var staff_list = connection.Query<Staff>("select * from staff");
 
-f
+                foreach (var staff in staff_list)　
+                {
+                    Console.WriteLine(staff.No + " " + staff.Name);
+                }
+                return staff_list; 
+            }
+            
+        }
 
-g
+        [HttpGet("{No}")]
+        public Staff GetOne(int No) //
+    {
+            using (var connection = Connection)
+            {
+                connection.Open();
+                Staff staff = connection.Query<Staff>
+                ("select * from staff where No = @No ", new { No = No }
+                
+                ).FirstOrDefault();
+                    
+                return staff;
 
-h
+                
+            }
 
-i
+    }
+
+        
+    [HttpPost]
+        public Staff PostStaff(Staff staff)
+        {
+            using (var connection = Connection)
+            {
+                connection.Open();
+                connection.Execute(
+  
+                "INSERT INTO staff (Name,Kana)" + " VALUES (@Name,@Kana)",
+                new
+  
+                {
+  
+                    Name = staff.Name,
+                    Kana = staff.Kana
+
+                });
+
+                staff.No = connection.ExecuteScalar<int>("SELECT LAST_INSERT_ID()");//
+
+                
+            }
+            Console.WriteLine(staff.No + " " + staff.Name + " " + staff.Kana);
+            return staff;
+        }
+
+
+        [HttpPut("{No}")]
+        public Staff PutOne(Staff staff) 
+        {
+            using (var connection = Connection)
+            {
+                connection.Open();//データベースに接続
+                connection.Execute(
+
+             " UPDATE staff SET Name=@Name,Kana=@Kana WHERE No=@No",
+                new
+                
+                {
+                    
+                    No   = staff.No,
+                    Name = staff.Name,
+                    Kana = staff.Kana
+
+                });
+               
+            }
+            Console.WriteLine(staff);
+
+            return staff;
+        }
+
+
+    [HttpDelete("{No}")] 
+
+        public int Delete(int No)
+
+        {
+            using (var connection = Connection)　
+            {
+                connection.Open();　
+                connection.Execute(" DELETE FROM staff WHERE No=@No",
+                new  
+                
+                {
+
+                    No = No   
+                });
+            }
+            return;
+        }
+
+    }
+}
